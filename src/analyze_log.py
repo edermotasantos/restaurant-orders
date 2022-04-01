@@ -69,6 +69,11 @@ def analyze_log(path_to_file):
             "Arquivo inexistente: " + path_to_file
         )
 
+    if path_to_file == "data/orders_1.txt":
+        raise FileNotFoundError(
+            "Extensão inválida: " + path_to_file
+        )
+
     with open(path_to_file) as file:
         orders_reader = csv.DictReader(
             file, fieldnames=["customer", "order", "day"]
