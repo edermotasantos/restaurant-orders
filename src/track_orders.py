@@ -77,7 +77,7 @@ def most_ordered_dish(order_list_csv, customer):
 
 def analyze_log(path_to_file):
     order_list_csv = []
-        
+
     with open(path_to_file) as file:
         orders_reader = csv.DictReader(
             file, fieldnames=["customer", "order", "day"]
@@ -91,11 +91,12 @@ def analyze_log(path_to_file):
 class TrackOrders:
     # aqui deve expor a quantidade de estoque
     order_list = []
+
     def __len__(self):
         return len(self.order_list)
 
     def add_new_order(self, customer, order, day):
-       self.order_list.append((customer, order, day))
+        self.order_list.append((customer, order, day))
 
     def get_most_ordered_dish_per_customer(self, customer):
         order_list_csv = analyze_log("data/orders_1.csv")
@@ -109,7 +110,9 @@ class TrackOrders:
 
     def get_days_never_visited_per_customer(self, customer):
         order_list_csv = analyze_log("data/orders_1.csv")
-        never_visited = days_never_visited_per_customer(order_list_csv, customer)
+        never_visited = days_never_visited_per_customer(
+            order_list_csv, customer
+        )
         return never_visited
 
     def get_busiest_day(self):
