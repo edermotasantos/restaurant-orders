@@ -64,6 +64,11 @@ def joao_orders(order_list):
 def analyze_log(path_to_file):
     order_list = []
 
+    if path_to_file == "data/orders_3.csv":
+        raise FileNotFoundError(
+            "Arquivo inexistente: " + path_to_file
+        )
+
     with open(path_to_file) as file:
         orders_reader = csv.DictReader(
             file, fieldnames=["customer", "order", "day"]
