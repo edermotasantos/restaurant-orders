@@ -1,17 +1,30 @@
 import csv
 
 
-def busiest_day(order_list):
+def least_busy_day(order_list):
     count = {}
     for order in order_list:
-        most_frequent_order = order[2]
+        least_busy = order[2]
         if order not in count:
             count[order[2]] = 1
         else:
             count[order[2]] += 1
-        if count[order[2]] > count[most_frequent_order]:
-            most_frequent_order = order[2]
-    return most_frequent_order
+        if count[order[2]] < count[least_busy]:
+            least_busy = order[2]
+    return least_busy
+
+
+def busiest_day(order_list):
+    count = {}
+    for order in order_list:
+        most_busy = order[2]
+        if order not in count:
+            count[order[2]] = 1
+        else:
+            count[order[2]] += 1
+        if count[order[2]] > count[most_busy]:
+            most_busy = order[2]
+    return most_busy
 
 
 def days_never_visited_per_customer(order_list_csv, customer):
@@ -100,9 +113,9 @@ class TrackOrders:
         return never_visited
 
     def get_busiest_day(self):
-        # order_list = analyze_log("data/orders_1.csv")
         the_busiest_day = busiest_day(self.order_list)
         return the_busiest_day
 
     def get_least_busy_day(self):
-        pass
+        the_least_busy_day = least_busy_day(self.order_list)
+        return the_least_busy_day
