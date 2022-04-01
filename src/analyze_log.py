@@ -13,13 +13,13 @@ def solve_answers(order_list):
             else:
                 count_hamburguer["hamburguer"] += 1
 
-        answer = joao_orders(order_list)
+        joao_data = joao_orders(order_list)
 
     with open("data/mkt_campaign.txt", "w") as txt_file:
         txt_file.write(
             most_frequent_order + "\n"
             + str(count_hamburguer["hamburguer"]) + "\n"
-            + answer
+            + joao_data
         )
     return None
 
@@ -57,8 +57,8 @@ def joao_orders(order_list):
         for day in joao_went:
             days_of_the_week.discard(day)
 
-    answer_list = str(all_orders) + "\n" + str(days_of_the_week)
-    return answer_list
+    joao_data = str(all_orders) + "\n" + str(days_of_the_week)
+    return joao_data
 
 
 def analyze_log(path_to_file):
