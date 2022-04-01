@@ -1,6 +1,24 @@
 import csv
 
 
+
+def never_ordered_per_customer(order_list, customer):
+    all_orders = set()
+    customer_orders = set()
+    for order in order_list:
+
+        all_orders.add(order[1])
+
+        if order[0] == customer:
+            customer_orders.add(order[1])
+
+        for customer_order in customer_orders:
+            all_orders.discard(customer_order)
+
+    customer_data = all_orders
+    return customer_data
+
+
 def most_ordered_dish(order_list, customer):
     count = {}
     for order in order_list:
@@ -27,6 +45,7 @@ def analyze_log(path_to_file):
 
     return order_list
 
+
 class TrackOrders:
     # aqui deve expor a quantidade de estoque
     order_list = []
@@ -43,7 +62,9 @@ class TrackOrders:
         return orders
 
     def get_never_ordered_per_customer(self, customer):
-        pass
+        order_list = analyze_log("data/orders_1.csv")
+        never_ordered = never_ordered_per_customer(order_list, customer)
+        return never_ordered
 
     def get_days_never_visited_per_customer(self, customer):
         pass
