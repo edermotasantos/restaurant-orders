@@ -1,10 +1,23 @@
 import csv
 
 
-def days_never_visited_per_customer(order_list, customer):
+def busiest_day(order_list):
+    count = {}
+    for order in order_list:
+        most_frequent_order = order[2]
+        if order not in count:
+            count[order[2]] = 1
+        else:
+            count[order[2]] += 1
+        if count[order[2]] > count[most_frequent_order]:
+            most_frequent_order = order[2]
+    return most_frequent_order
+
+
+def days_never_visited_per_customer(order_list_csv, customer):
     days_of_the_week = set()
     customer_went = set()
-    for order in order_list:
+    for order in order_list_csv:
 
         days_of_the_week.add(order[2])
 
@@ -18,10 +31,10 @@ def days_never_visited_per_customer(order_list, customer):
     return customer_data
 
 
-def never_ordered_per_customer(order_list, customer):
+def never_ordered_per_customer(order_list_csv, customer):
     all_orders = set()
     customer_orders = set()
-    for order in order_list:
+    for order in order_list_csv:
 
         all_orders.add(order[1])
 
@@ -35,9 +48,9 @@ def never_ordered_per_customer(order_list, customer):
     return customer_data
 
 
-def most_ordered_dish(order_list, customer):
+def most_ordered_dish(order_list_csv, customer):
     count = {}
-    for order in order_list:
+    for order in order_list_csv:
         most_frequent_order = order[1]
         if order[0] == customer:
             if order not in count:
@@ -50,45 +63,46 @@ def most_ordered_dish(order_list, customer):
 
 
 def analyze_log(path_to_file):
-    order_list = []
+    order_list_csv = []
         
     with open(path_to_file) as file:
         orders_reader = csv.DictReader(
             file, fieldnames=["customer", "order", "day"]
         )
         for row in orders_reader:
-            order_list.append((row["customer"], row["order"], row["day"]))
+            order_list_csv.append((row["customer"], row["order"], row["day"]))
 
-    return order_list
+    return order_list_csv
 
 
 class TrackOrders:
     # aqui deve expor a quantidade de estoque
     order_list = []
     def __len__(self):
-        self.data = self.order_list
-        return len(self.data)
+        return len(self.order_list)
 
     def add_new_order(self, customer, order, day):
-       self.order_list.append([customer, order, day])
+       self.order_list.append((customer, order, day))
 
     def get_most_ordered_dish_per_customer(self, customer):
-        order_list = analyze_log("data/orders_1.csv")
-        orders = most_ordered_dish(order_list, customer)
+        order_list_csv = analyze_log("data/orders_1.csv")
+        orders = most_ordered_dish(order_list_csv, customer)
         return orders
 
     def get_never_ordered_per_customer(self, customer):
-        order_list = analyze_log("data/orders_1.csv")
-        never_ordered = never_ordered_per_customer(order_list, customer)
+        order_list_csv = analyze_log("data/orders_1.csv")
+        never_ordered = never_ordered_per_customer(order_list_csv, customer)
         return never_ordered
 
     def get_days_never_visited_per_customer(self, customer):
-        order_list = analyze_log("data/orders_1.csv")
-        never_visited = days_never_visited_per_customer(order_list, customer)
+        order_list_csv = analyze_log("data/orders_1.csv")
+        never_visited = days_never_visited_per_customer(order_list_csv, customer)
         return never_visited
 
     def get_busiest_day(self):
-        pass
+        # order_list = analyze_log("data/orders_1.csv")
+        the_busiest_day = busiest_day(self.order_list)
+        return the_busiest_day
 
     def get_least_busy_day(self):
         pass
