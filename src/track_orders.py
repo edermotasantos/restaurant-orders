@@ -1,6 +1,22 @@
 import csv
 
 
+def days_never_visited_per_customer(order_list, customer):
+    days_of_the_week = set()
+    customer_went = set()
+    for order in order_list:
+
+        days_of_the_week.add(order[2])
+
+        if order[0] == customer:
+            customer_went.add(order[2])
+
+        for day in customer_went:
+            days_of_the_week.discard(day)
+
+    customer_data = days_of_the_week
+    return customer_data
+
 
 def never_ordered_per_customer(order_list, customer):
     all_orders = set()
@@ -67,7 +83,9 @@ class TrackOrders:
         return never_ordered
 
     def get_days_never_visited_per_customer(self, customer):
-        pass
+        order_list = analyze_log("data/orders_1.csv")
+        never_visited = days_never_visited_per_customer(order_list, customer)
+        return never_visited
 
     def get_busiest_day(self):
         pass
