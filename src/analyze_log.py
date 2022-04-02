@@ -2,24 +2,16 @@ import csv
 
 
 def solve_answers(order_list):
-    count_hamburguer = {}
-
     most_frequent_order = maria_orders(order_list)
 
-    for order in order_list:
-
-        if order[0] == "arnaldo" and order[1] == "hamburguer":
-            if "hamburguer" not in count_hamburguer:
-                count_hamburguer["hamburguer"] = 1
-            else:
-                count_hamburguer["hamburguer"] += 1
+    arnaldo_orders_str = arnaldo_orders(order_list)
 
     joao_data = joao_orders(order_list)
 
     with open("data/mkt_campaign.txt", "w") as txt_file:
         txt_file.write(
             most_frequent_order + "\n"
-            + str(count_hamburguer["hamburguer"]) + "\n"
+            + arnaldo_orders_str + "\n"
             + joao_data
         )
     return None
@@ -61,6 +53,18 @@ def joao_orders(order_list):
 
     joao_data = str(all_orders) + "\n" + str(days_of_the_week)
     return joao_data
+
+
+def arnaldo_orders(order_list):
+    count_hamburguer = {}
+    for order in order_list:
+
+        if order[0] == "arnaldo" and order[1] == "hamburguer":
+            if "hamburguer" not in count_hamburguer:
+                count_hamburguer["hamburguer"] = 1
+            else:
+                count_hamburguer["hamburguer"] += 1
+    return str(count_hamburguer["hamburguer"])
 
 
 def analyze_log(path_to_file):
