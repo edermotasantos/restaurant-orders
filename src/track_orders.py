@@ -113,6 +113,7 @@ class TrackOrders:
         never_visited = days_never_visited_per_customer(
             order_list_csv, customer
         )
+        self.order_list.clear()
         return never_visited
 
     def get_busiest_day(self):
