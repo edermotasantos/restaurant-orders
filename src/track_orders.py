@@ -3,8 +3,8 @@ import csv
 
 def least_busy_day(order_list):
     count = {}
+    least_busy = order_list[0][2]
     for order in order_list:
-        least_busy = order[2]
         if order not in count:
             count[order[2]] = 1
         else:
