@@ -14,7 +14,7 @@ def solve_answers(order_list):
             else:
                 count_hamburguer["hamburguer"] += 1
 
-        joao_data = joao_orders(order_list)
+    joao_data = joao_orders(order_list)
 
     with open("data/mkt_campaign.txt", "w") as txt_file:
         txt_file.write(
