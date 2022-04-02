@@ -4,8 +4,9 @@ import csv
 def solve_answers(order_list):
     count_hamburguer = {}
 
+    most_frequent_order = maria_orders(order_list)
+
     for order in order_list:
-        most_frequent_order = maria_orders(order)
 
         if order[0] == "arnaldo" and order[1] == "hamburguer":
             if "hamburguer" not in count_hamburguer:
@@ -24,16 +25,17 @@ def solve_answers(order_list):
     return None
 
 
-def maria_orders(order):
+def maria_orders(order_list):
     count = {}
-    most_frequent_order = order[1]
-    if order[0] == "maria":
-        if order not in count:
-            count[order[1]] = 1
-        else:
-            count[order[1]] += 1
-        if count[order[1]] > count[most_frequent_order]:
-            most_frequent_order = order[1]
+    most_frequent_order = order_list[0][1]
+    for order in order_list:
+        if order[0] == "maria":
+            if order not in count:
+                count[order[1]] = 1
+            else:
+                count[order[1]] += 1
+            if count[order[1]] > count[most_frequent_order]:
+                most_frequent_order = order[1]
     return most_frequent_order
 
 
