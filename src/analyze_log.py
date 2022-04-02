@@ -45,11 +45,11 @@ def joao_orders(order_list):
             joao_orders.add(order[1])
             joao_went.add(order[2])
 
-        for joao_order in joao_orders:
-            all_orders.discard(joao_order)
+    for joao_order in joao_orders:
+        all_orders.discard(joao_order)
 
-        for day in joao_went:
-            days_of_the_week.discard(day)
+    for day in joao_went:
+        days_of_the_week.discard(day)
 
     joao_data = str(all_orders) + "\n" + str(days_of_the_week)
     return joao_data
