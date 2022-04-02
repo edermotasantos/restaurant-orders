@@ -16,8 +16,8 @@ def least_busy_day(order_list):
 
 def busiest_day(order_list):
     count = {}
+    most_busy = order_list[0][2]
     for order in order_list:
-        most_busy = order[2]
         if order not in count:
             count[order[2]] = 1
         else:
